@@ -116,3 +116,7 @@ def search_show():
         return jsonify(hits)
     except TransportError as err:
         abort(400)
+
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0')
