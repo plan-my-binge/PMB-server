@@ -1,0 +1,11 @@
+[Unit]
+Description=Rendora
+After=syslog.target
+
+[Service]
+ExecStart=/usr/bin/rendora --config /home/ec2-user/rendora/config.json
+RestartSec=5s
+Restart=on-success
+
+[Install]
+WantedBy=multi-user.target

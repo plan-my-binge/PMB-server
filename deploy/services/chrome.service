@@ -1,0 +1,11 @@
+[Unit]
+Description=Chrome
+After=syslog.target
+
+[Service]
+ExecStart=/usr/bin/google-chrome --headless --remote-debugging-port=9222 --no-sandbox
+RestartSec=5s
+Restart=on-success
+
+[Install]
+WantedBy=multi-user.target
