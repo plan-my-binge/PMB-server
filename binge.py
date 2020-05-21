@@ -67,6 +67,7 @@ def get_popular_shows():
 @app.route('/shows/<show_id>')
 def get_show(show_id):
     try:
+        show_id = show_id.split('-')[0]
         response = es.search(
             index=ELASTICSEARCH_INDEX,
             doc_type=ELASTICSEARCH_DOCTYPE,
