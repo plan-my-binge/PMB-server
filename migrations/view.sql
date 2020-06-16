@@ -5,6 +5,7 @@ select seriesId,
        t.primarytitle,
        t.startyear,
        t.endyear,
+       episodeYear,
        t.genres,
        seasonnumber,
        numberOfEpisodes,
@@ -16,6 +17,7 @@ select seriesId,
        t.id as pmb_id
 from (
          select tb.tconst              seriesId,
+                tb.startyear           episodeYear,
                 seasonnumber,
                 count(episodenumber)   numberOfEpisodes,
                 sum(tb.runtimeminutes) seasonRunTime

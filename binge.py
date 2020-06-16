@@ -5,16 +5,13 @@ from flask import Flask, jsonify, request, abort
 from flask_compress import Compress
 from flask_cors import CORS
 
-ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
-ELASTICSEARCH_USER = os.environ.get('ELASTICSEARCH_USER')
-ELASTICSEARCH_PASSWORD = os.environ.get('ELASTICSEARCH_PASSWORD')
+ELASTICSEARCH_URL = "http://localhost:9200"
 ELASTICSEARCH_INDEX = 'binge'
 ELASTICSEARCH_DOCTYPE = 'series'
 
 es = Elasticsearch([ELASTICSEARCH_URL],
-                   http_auth=(ELASTICSEARCH_USER, ELASTICSEARCH_PASSWORD),
-                   scheme='https',
-                   port='9243'
+                   scheme='http',
+                   port='9200'
                    )
 
 app = Flask(__name__)
@@ -81,7 +78,10 @@ def get_show(show_id):
                         'pmb_id': show_id
                     }
                 }
-            }
+            },
+            sort=[{
+                "averageRating": {"order": "desc"}
+            }]
         )
         hits = response['hits']['hits']
         return jsonify(hits)
@@ -107,7 +107,10 @@ def search_show():
                         'primaryTitle': query
                     }
                 }
-            }
+            },
+            sort=[{
+                "averageRating": {"order": "desc"}
+            }]
         )
 
         if not bool(response):
