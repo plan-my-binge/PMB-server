@@ -79,9 +79,9 @@ def get_show(show_id):
                     }
                 }
             },
-            sort=[{
-                "averageRating": {"order": "desc"}
-            }]
+            sort=[
+                "averageRating", {"order": "desc"}
+            ]
         )
         hits = response['hits']['hits']
         return jsonify(hits)
@@ -108,9 +108,9 @@ def search_show():
                     }
                 }
             },
-            sort=[{
-                "averageRating": {"order": "desc"}
-            }]
+            sort=[
+                "averageRating", {"order": "desc"}
+            ]
         )
 
         if not bool(response):
