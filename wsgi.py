@@ -1,4 +1,4 @@
-from binge import app
+from binge import app as application
 
 if __name__ == "__main__":
-    app.run()
+    application.run()
