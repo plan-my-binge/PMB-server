@@ -1,34 +1,34 @@
 
-
 create view series_metrics as
 select seriesId,
-       t.primarytitle,
-       t.startyear,
-       t.endyear,
-       episodeYear,
-       t.genres,
+       show_basic.primarytitle,
+       show_basic.startyear,
+       show_basic.endyear,
+       seasonStartYear,
+       show_basic.genres,
        seasonnumber,
        numberOfEpisodes,
        seasonRunTime,
-       tr.averagerating,
-       tp.landscapeposter,
-       tp.portraitposter,
-       t.runtimeminutes as perEpisodeRuntime,
-       t.id as pmb_id
+       show_rating.averagerating,
+       show_poster.landscapeposter,
+       show_poster.portraitposter,
+       show_basic.runtimeminutes as perEpisodeRuntime,
+       show_basic.id             as pmb_id
 from (
-         select tb.tconst              seriesId,
-                tb.startyear           episodeYear,
+         select show_basic.tconst              seriesId,
                 seasonnumber,
-                count(episodenumber)   numberOfEpisodes,
-                sum(tb.runtimeminutes) seasonRunTime
-         from title_episode te
-                  join title_basics tb on te.parenttconst = tb.tconst
-         where te.seasonnumber is not null
-         group by seasonnumber, tb.tconst) episodes
-         join title_basics t
-              on t.tconst = seriesId
-         join title_ratings tr
-              on t.tconst = tr.tconst
-         join title_posters tp
-              on t.tconst = tp.tconst
+                count(episodenumber)           numberOfEpisodes,
+                sum(show_basic.runtimeminutes) seasonRunTime,
+                min(episode_basic.startyear)   seasonStartYear
+         from title_episode episode
+                  join title_basics show_basic on episode.parenttconst = show_basic.tconst
+                  join title_basics episode_basic on episode.tconst = episode_basic.tconst
+         where episode.seasonnumber is not null
+         group by seasonnumber, show_basic.tconst) episodes
+         join title_basics show_basic
+              on show_basic.tconst = seriesId
+         join title_ratings show_rating
+              on show_basic.tconst = show_rating.tconst
+         join title_posters show_poster
+              on show_basic.tconst = show_poster.tconst
 order by seriesId, seasonnumber
