@@ -80,7 +80,7 @@ def get_show(show_id):
                 }
             },
             sort=[
-                "averageRating", {"order": "desc"}
+                {"averageRating": "desc"}
             ]
         )
         hits = response['hits']['hits']
@@ -109,7 +109,7 @@ def search_show():
                 }
             },
             sort=[
-                "averageRating", {"order": "desc"}
+                {"averageRating": "desc"}
             ]
         )
 
