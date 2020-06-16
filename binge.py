@@ -5,7 +5,7 @@ from flask import Flask, jsonify, request, abort
 from flask_compress import Compress
 from flask_cors import CORS
 
-ELASTICSEARCH_URL = "http://localhost:9200"
+ELASTICSEARCH_URL = "localhost"
 ELASTICSEARCH_INDEX = 'binge'
 ELASTICSEARCH_DOCTYPE = 'series'
 
