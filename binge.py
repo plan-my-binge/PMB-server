@@ -104,7 +104,10 @@ def search_show():
                         'primaryTitle': query
                     }
                 }
-            }
+            },
+            sort=[
+                'averageRating:desc'
+            ]
         )
 
         if not bool(response):
