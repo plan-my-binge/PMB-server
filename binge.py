@@ -78,10 +78,7 @@ def get_show(show_id):
                         'pmb_id': show_id
                     }
                 }
-            },
-            sort=[
-                {"averageRating": "desc"}
-            ]
+            }
         )
         hits = response['hits']['hits']
         return jsonify(hits)
@@ -107,10 +104,7 @@ def search_show():
                         'primaryTitle': query
                     }
                 }
-            },
-            sort=[
-                {"averageRating": "desc"}
-            ]
+            }
         )
 
         if not bool(response):
