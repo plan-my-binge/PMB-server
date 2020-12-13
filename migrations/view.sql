@@ -1,3 +1,4 @@
+DROP VIEW series_metrics;
 
 create view series_metrics as
 select seriesId,
@@ -13,7 +14,7 @@ select seriesId,
        show_poster.landscapeposter,
        show_poster.portraitposter,
        show_basic.runtimeminutes as perEpisodeRuntime,
-       show_basic.id             as pmb_id
+       map.pmb_id                as pmb_id
 from (
          select show_basic.tconst              seriesId,
                 seasonnumber,
@@ -27,8 +28,10 @@ from (
          group by seasonnumber, show_basic.tconst) episodes
          join title_basics show_basic
               on show_basic.tconst = seriesId
+         join internal_id_mapping map
+              on show_basic.tconst = map.tconst
          join title_ratings show_rating
               on show_basic.tconst = show_rating.tconst
-         join title_posters show_poster
+         left join title_posters_bk show_poster
               on show_basic.tconst = show_poster.tconst
 order by seriesId, seasonnumber

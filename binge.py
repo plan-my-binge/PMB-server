@@ -101,7 +101,7 @@ def search_show():
                 '_source': fields_of_interest,
                 'query': {
                     'match': {
-                        'primaryTitle': query
+                        'primaryTitle2': query
                     }
                 }
             },
