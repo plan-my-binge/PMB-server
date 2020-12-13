@@ -100,8 +100,11 @@ def search_show():
             body={
                 '_source': fields_of_interest,
                 'query': {
-                    'match': {
-                        'primaryTitle2': query
+                    'common': {
+                        'primaryTitle2': {
+                            'query': query,
+                            "cutoff_frequency": 0.001
+                        }
                     }
                 }
             },
