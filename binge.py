@@ -101,7 +101,7 @@ def search_show():
                 '_source': fields_of_interest,
                 'query': {
                     'common': {
-                        'primaryTitle2': {
+                        'primaryTitle': {
                             'query': query,
                             "cutoff_frequency": 0.001
                         }

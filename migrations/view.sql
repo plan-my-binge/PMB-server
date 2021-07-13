@@ -32,6 +32,6 @@ from (
               on show_basic.tconst = map.tconst
          join title_ratings show_rating
               on show_basic.tconst = show_rating.tconst
-         left join title_posters_bk show_poster
+         join title_posters_bk show_poster
               on show_basic.tconst = show_poster.tconst
 order by seriesId, seasonnumber
